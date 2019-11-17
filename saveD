@@ -22,6 +22,6 @@ COPY script_mysql.sql /tmp/script_mysql.sql
 RUN wget https://wordpress.org/latest.tar.gz
 RUN tar xzf latest.tar.gz
 RUN mv wordpress /var/www/html/wordpress
-RUN sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mysql/mysql.conf.d/mysqld.cnf \
-   && chown -R mysql:mysql /var/run/mysqld
-ENTRYPOINT ["mysqld_safe"]
+COPY s.sh s.sh
+RUN touch /var/run/mysqld/mysqld.sock && chown -R mysql /var/run/mysqld
+ENTRYPOINT service mysql start
