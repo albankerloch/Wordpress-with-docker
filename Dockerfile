@@ -22,6 +22,7 @@ COPY script_mysql.sql /tmp/script_mysql.sql
 RUN wget https://wordpress.org/latest.tar.gz
 RUN tar xzf latest.tar.gz
 RUN mv wordpress /var/www/html/wordpress
+COPY wp-config.php /var/www/html/wordpress/wp-config.php 
 COPY entry.sh entry.sh
 RUN chmod 777 entry.sh
 ENTRYPOINT ["/bin/bash","entry.sh"]
