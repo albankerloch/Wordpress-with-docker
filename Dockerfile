@@ -25,4 +25,6 @@ RUN mv wordpress /var/www/html/wordpress
 COPY wp-config.php /var/www/html/wordpress/wp-config.php 
 COPY entry.sh entry.sh
 RUN chmod 777 entry.sh
+COPY wordpress.sql wordpress.sql
+RUN chmod 777 wordpress.sql
 ENTRYPOINT ["/bin/bash","entry.sh"]
