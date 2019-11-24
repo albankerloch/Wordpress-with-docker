@@ -7,7 +7,7 @@ RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-s
 	echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 RUN apt install -y ./mysql-apt-config_0.8.13-1_all.deb
 RUN apt-get update && \
-        apt-get install -y mysql-server
+        apt-get install -y mariadb-server
 RUN apt-get update && \
         apt-get install -y php-fpm php-mysql
 COPY default /etc/nginx/sites-enabled/default
@@ -22,6 +22,6 @@ COPY script_mysql.sql /tmp/script_mysql.sql
 RUN wget https://wordpress.org/latest.tar.gz
 RUN tar xzf latest.tar.gz
 RUN mv wordpress /var/www/html/wordpress
-RUN sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mysql/mysql.conf.d/mysqld.cnf \
-   && chown -R mysql:mysql /var/run/mysqld
-ENTRYPOINT ["mysqld_safe"]
+COPY entry.sh entry.sh
+RUN chmod 777 entry.sh
+ENTRYPOINT ["/bin/bash","entry.sh"]
