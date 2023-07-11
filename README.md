@@ -11,12 +11,18 @@ Features :
 
 ## Installation
 
-Launch the container with those commands : 
+Launch the container with those commands on Linux : 
 
 
 ```bash
 sudo docker build -t wpserver . && sudo docker run -it wpserver
 ```
+
+on Windows : 
+```bash
+docker build -t wpserver .
+```
+then run your container on docker desktop (https://docs.docker.com/get-started/run-your-own-container/)
 
 (docker needed : https://docs.docker.com/engine/install/debian/ 
 or https://docs.docker.com/desktop/install/windows-install/)
